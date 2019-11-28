@@ -1,24 +1,48 @@
+h1 {
+  font-size: 40px;
+  text-align: center;
+  padding: 30px;
+}
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+  padding: 20px;
+}
+
+p {
+  font-size: medium;
+  padding: 10px;
+}
+
+.bodyCopy {
+  padding-top: 40px;
+}
+
 body {
-  width: 80%
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .resultsBar {
   outline: 1px solid red;
   width: 30%;
   float: left;
-  height: 350px;
+  height: 500px;
 }
-
 
 #image-container {
   outline: 1px solid blue;
   width: 70%;
-  height: 350px;
+  height: 500px;
   float: right;
 }
 
 #image-container > img {
   width: 28%;
-  vertical-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
 }
 

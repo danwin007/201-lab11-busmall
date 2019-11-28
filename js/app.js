@@ -6,9 +6,13 @@ console.log('proof of life');
 var picOne = document.getElementById('pic1');
 var picTwo = document.getElementById('pic2');
 var picThree = document.getElementById('pic3');
+var ulEl = document.getElementById('results-container');
 
 // images array
 var picArray = [];
+
+// total click counter
+var clickTotal = 0;
 
 // picture container to pair with event listener
 var pictureContainer = document.getElementById('image-container');
@@ -20,7 +24,6 @@ function Picture (src, name) {
   this.alt = name;
   this.clicked = 0;
   this.viewed = 0;
-  this.clickTotal = 0;
   picArray.push(this);
 }
 
@@ -31,7 +34,6 @@ function randomIndex(max) {
 
 // function to hold images
 function createOnPageLoad () {
-
   new Picture ('bag', 'bag');
   new Picture ('banana', 'banana');
   new Picture ('bathroom', 'bathroom');
@@ -66,8 +68,12 @@ function handleClick(event) {
   }
   // make new images after click
   generateImages();
-  // add to total click count, max 25
-  Picture.clickTotal++;
+
+  // check for 25 clicks
+  totalFire();
+  // add to countTotal
+  clickTotal++;
+  console.log(clickTotal);
 }
 
 // function to add images to page
@@ -115,6 +121,19 @@ function generateImages () {
 
 // event listener
 pictureContainer.addEventListener('click', handleClick);
+
+// function to display votes after 25 clicks
+function totalFire(){
+  if (clickTotal === 5) {
+    // placeholder, remove click event listener here
+    //add a for loop to run through array, print each item to Results
+    for (var i = 0; i < picArray.length; i++) {
+      var liResultsEl = document.createElement('li');
+      liResultsEl.textContent = `${picArray[i].title} got ${picArray[i].clicked} clicks`;
+      ulEl.appendChild(liResultsEl);
+    }
+  }
+}
 
 createOnPageLoad();
 generateImages();
