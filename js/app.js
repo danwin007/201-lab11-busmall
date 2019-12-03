@@ -46,7 +46,7 @@ function createOnPageLoad () {
   new Picture ('dragon', 'dragon');
   new Picture ('pen', 'pen');
   new Picture ('pet-sweep', 'pet-sweep');
-  new Picture ('scissors', 'shark');
+  new Picture ('scissors', 'scissors');
   new Picture ('shark', 'shark');
   new Picture ('sweep', 'sweep');
   new Picture ('tauntaun', 'tauntaun');
@@ -124,14 +124,14 @@ pictureContainer.addEventListener('click', handleClick);
 
 // function to display votes after 25 clicks
 function totalFire(){
-  if (clickTotal === 5) {
+  if (clickTotal === 25) {
     // placeholder, remove click event listener here
     //add a for loop to run through array, print each item to Results
     for (var i = 0; i < picArray.length; i++) {
       var liResultsEl = document.createElement('li');
-      liResultsEl.textContent = `${picArray[i].title} got ${picArray[i].clicked} clicks`;
+      liResultsEl.textContent = `${picArray[i].title} got ${picArray[i].clicked} clicks and ${picArray[i].viewed} views.`;
       ulEl.appendChild(liResultsEl);
-    }
+    } pictureContainer.removeEventListener('click', handleClick);
   }
 }
 
