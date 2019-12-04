@@ -27,7 +27,7 @@ p {
 }
 
 .bodyCopy {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 body {
@@ -37,10 +37,23 @@ body {
 }
 
 .resultsBar {
-  /* outline: 1px solid red; */
-  width: 30%;
-  float: left;
-  height: 500px;
+  outline: 1px solid red;
+  /* width: 30%; */
+  /* float: left; */
+  width: 80%;
+  margin: auto;
+  /* height: 200px; */
+  /* display: none; */
+}
+
+#chart {
+  display: none;
+}
+
+#myChart {
+  width: 100%;
+  margin: auto;
+  padding-top: 15px;
 }
 
 li {
@@ -48,16 +61,39 @@ li {
 }
 
 #image-container {
-  /* outline: 1px solid blue; */
-  width: 70%;
-  height: 500px;
-  float: right;
+  outline: 1px solid blue;
+  /* width: 70%; */
+  width: 80%;
+  margin: auto;
+  height: 325px;
+  /* float: right; */
 }
 
 #image-container > img {
-  width: 28%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 29%;
+  /* margin-left: auto;
+  margin-right: auto; */
   vertical-align: middle;
+}
+
+#pic1 {
+  /* float: left; */
+  margin: auto;
+  outline: 3px dotted red;
+  padding: 2px;
+}
+
+#pic2 {
+  margin: auto;
+  width: 30%;
+  outline: 3px dotted yellow;
+  padding: 2px;
+}
+
+#pic3 {
+  /* float: right; */
+  margin: auto;
+  outline: 3px dotted green;
+  padding: 2px;
 }
 
