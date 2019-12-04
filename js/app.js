@@ -8,8 +8,11 @@ var picTwo = document.getElementById('pic2');
 var picThree = document.getElementById('pic3');
 var ulEl = document.getElementById('results-container');
 
-// images array
+// images array for results
 var picArray = [];
+
+// image container array for voting
+// var picArrayContainers = [photoOne, photoTwo, photoThree];
 
 // total click counter
 var clickTotal = 0;
@@ -32,7 +35,7 @@ function randomIndex(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-// function to hold images
+// function to create and hold images
 function createOnPageLoad () {
   new Picture ('bag', 'bag');
   new Picture ('banana', 'banana');

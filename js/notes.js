@@ -40,8 +40,6 @@ function picSelect() {
     while (currentImages.includes(currentRandomIndex)) {
       currentRandomIndex = randomIndex(picArray.length);
     }
-    
-    
     currentImages.push(currentRandomIndex);
     picArrayContainers[i].src = picArray[currentRandomIndex].src;
     picArrayContainers[i].title = picArray[currentRandomIndex].title;
