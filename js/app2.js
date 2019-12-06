@@ -9,11 +9,14 @@ var picThree = document.getElementById('pic3');
 // var ulEl = document.getElementById('results-container');
 var chartPop = document.getElementById('chart');
 
-// images array for results holding
+// FULL images array for results holding
 var picArray = [];
 
 // image container array for voting
 var picArrayContainers = [picOne, picTwo, picThree];
+
+// arr to hold unique array of 6 images
+var uniqueIndexes = [];
 
 // total click counter
 var clickTotal = 25;
@@ -63,6 +66,7 @@ function createOnPageLoad () {
   new Picture ('usb', 'usb');
   new Picture ('water-can', 'water-can');
   new Picture ('wine-glass', 'wine-glass');
+  improvedPicSelect();
 }
 
 // function to push click and view data into array
@@ -78,55 +82,107 @@ function clickAndViewPush () {
 function handleClick(event) {
   // create var to hold click data to remember which was voted for
   var vote = event.target.title;
+
+  // subtract from countTotal
+  clickTotal--;
+  console.log('votes remaining', clickTotal);
+
   // to count and catch clicked items
   for (var i = 0; i < picArray.length; i++) {
     if(vote === picArray[i].title) {
       picArray[i].clicked++;
     }
   }
-  // make new images after click
-  picSelect();
+  // // make new images after click
+  // picSelect();
 
-  // check for 25 clicks
-  totalFire();
+  // // check for 25 clicks
+  // totalFire();
 
-  // add to countTotal
-  clickTotal--;
-  console.log('votes remaining', clickTotal);
+  // fn to call if clicks = 0
+  // if, display chart, else, cycle images
+  if (clickTotal === 0) {
+    //remove listener
+    pictureContainer.removeEventListener('click', handleClick);
+    //push clicks/views into final array for chart
+    clickAndViewPush();
+    //build chart data
+    makeChart();
+    //show the chart
+    show(chartPop);
+  } else {
+    removeThree();
+    improvedPicSelect();
+  }
 }
 
+// // function to display votes after 25 clicks
+// function totalFire(){
+//   if (clickTotal === 0) {
+//     //activate chart display
+//     pictureContainer.removeEventListener('click', handleClick);
+//     clickAndViewPush();
+//     makeChart();
+//     console.log('views', viewsArray);
+//     console.log('clicks', clicksArray);
+//     show(chartPop);
+//   }
+// }
+
 // NEW FN TO GEN IMAGES
-function picSelect() {
-  var currentImages = [];
-  for(var i = 0; i < picArrayContainers.length; i++) {
-    var currentRandomIndex = randomIndex(picArray.length);
-    while (currentImages.includes(currentRandomIndex)) {
-      currentRandomIndex = randomIndex(picArray.length);
+// function picSelect() {
+//   var currentImages = [];
+//   for(var i = 0; i < picArrayContainers.length; i++) {
+//     var currentRandomIndex = randomIndex(picArray.length);
+//     while (currentImages.includes(currentRandomIndex)) {
+//       currentRandomIndex = randomIndex(picArray.length);
+//     }
+//     currentImages.push(currentRandomIndex);
+//     picArrayContainers[i].src = picArray[currentRandomIndex].src;
+//     picArrayContainers[i].title = picArray[currentRandomIndex].title;
+//     picArrayContainers[i].alt = picArray[currentRandomIndex].alt;
+//     picArray[currentRandomIndex].viewed++;
+//   }
+//   console.table(picArray);
+// }
+
+// Get 6 FN, to create 2x sets of 3 unique images
+function getUnique() {
+  while (uniqueIndexes.length < 6) {
+    var random = randomIndex(picArray.length);
+
+    if (!uniqueIndexes.includes(random)) {
+      uniqueIndexes.push(random);
     }
-    currentImages.push(currentRandomIndex);
-    picArrayContainers[i].src = picArray[currentRandomIndex].src;
-    picArrayContainers[i].title = picArray[currentRandomIndex].title;
-    picArrayContainers[i].alt = picArray[currentRandomIndex].alt;
-    picArray[currentRandomIndex].viewed++;
   }
-  console.table(picArray);
+}
+
+// remove first 3 from 6 arr
+function removeThree() {
+  for (var i = 0; i < 3; i++) {
+    console.log('before shift', uniqueIndexes);
+    uniqueIndexes.shift();
+    console.log('after shift', uniqueIndexes);
+  }
+}
+
+// improved pic select fn aka generateImages()
+function improvedPicSelect() {
+  getUnique();
+
+  //below forloop runs thru the arr of 3 imgs to display
+  for (var i = 0; i <picArrayContainers.length; i++) {
+    picArrayContainers[i].src = picArray[uniqueIndexes[i]].src;
+    picArrayContainers[i].alt = picArray[uniqueIndexes[i]].alt;
+    picArrayContainers[i].title = picArray[uniqueIndexes[i]].title;
+
+    picArray[uniqueIndexes[i]].viewed++;
+  }
 }
 
 // event listener
 pictureContainer.addEventListener('click', handleClick);
 
-// function to display votes after 25 clicks
-function totalFire(){
-  if (clickTotal === 0) {
-    //activate chart display 
-    pictureContainer.removeEventListener('click', handleClick);
-    clickAndViewPush();
-    makeChart();
-    console.log('views', viewsArray);
-    console.log('clicks', clicksArray);
-    show(chartPop);
-  }
-}
 
 // function to show/hide
 function show(chartPop) {
@@ -137,6 +193,7 @@ function show(chartPop) {
 function makeChart() {
 
   var ctx = document.getElementById('myChart').getContext('2d');
+  // eslint-disable-next-line no-unused-vars
   var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
@@ -168,4 +225,4 @@ function makeChart() {
 // add images to array on page load
 createOnPageLoad();
 // generate images initially, and per click
-picSelect();
+// picSelect();
