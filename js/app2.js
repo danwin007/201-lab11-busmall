@@ -29,6 +29,9 @@ var titleArray = [];
 // picture container to pair with event listener
 var pictureContainer = document.getElementById('image-container');
 
+// reset click var to pair with reset event handler
+var resetCommand = document.getElementById('resetVotes');
+
 // constructor function for images
 function Picture (src, name) {
   this.src = `../images/${src}.jpg`;
@@ -148,9 +151,11 @@ function improvedPicSelect() {
   }
 }
 
-// event listener
+// event listener for click pic changes
 pictureContainer.addEventListener('click', handleClick);
 
+// event listener for reset vote data
+resetCommand.addEventListener('click', resetClick);
 
 // function to show/hide
 function show(chartPop) {
@@ -204,6 +209,16 @@ function dataGet() {
     var parseVotes = JSON.parse(getVotes);
     picArray = parseVotes;
   }
+  // make else stuff
+}
+
+// FN to reset on click w event handler
+function resetClick() {
+  clicksArray = [];
+  viewsArray = [];
+  titleArray = [];
+  localStorage.clear();
+  location.reload();
 }
 
 // add images to array on page load & create initial images
