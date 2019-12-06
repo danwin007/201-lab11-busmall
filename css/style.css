@@ -37,7 +37,7 @@ body {
 }
 
 .resultsBar {
-  outline: 1px solid red;
+  outline: 1px dashed red;
   /* width: 30%; */
   /* float: left; */
   width: 80%;
@@ -61,7 +61,7 @@ li {
 }
 
 #image-container {
-  outline: 1px solid blue;
+  /* outline: 1px solid blue; */
   /* width: 70%; */
   width: 80%;
   margin: auto;
@@ -79,21 +79,27 @@ li {
 #pic1 {
   /* float: left; */
   margin: auto;
-  outline: 3px dotted red;
+  /* outline: 3px dotted red; */
   padding: 2px;
 }
 
 #pic2 {
   margin: auto;
   width: 30%;
-  outline: 3px dotted yellow;
+  /* outline: 3px dotted yellow; */
   padding: 2px;
 }
 
 #pic3 {
   /* float: right; */
   margin: auto;
-  outline: 3px dotted green;
+  /* outline: 3px dotted green; */
   padding: 2px;
+}
+
+#resetVotes {
+  text-align: center;
+  font-size: large;
+  color: maroon;
 }
 

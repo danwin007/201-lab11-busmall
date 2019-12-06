@@ -29,6 +29,9 @@ var titleArray = [];
 // picture container to pair with event listener
 var pictureContainer = document.getElementById('image-container');
 
+// reset click var to pair with reset event handler
+var resetCommand = document.getElementById('resetVotes');
+
 // constructor function for images
 function Picture (src, name) {
   this.src = `../images/${src}.jpg`;
@@ -67,6 +70,7 @@ function createOnPageLoad () {
   new Picture ('water-can', 'water-can');
   new Picture ('wine-glass', 'wine-glass');
   improvedPicSelect();
+  dataGet();
 }
 
 // function to push click and view data into array
@@ -93,11 +97,6 @@ function handleClick(event) {
       picArray[i].clicked++;
     }
   }
-  // // make new images after click
-  // picSelect();
-
-  // // check for 25 clicks
-  // totalFire();
 
   // fn to call if clicks = 0
   // if, display chart, else, cycle images
@@ -110,41 +109,13 @@ function handleClick(event) {
     makeChart();
     //show the chart
     show(chartPop);
+    //store vote data
+    dataStore();
   } else {
     removeThree();
     improvedPicSelect();
   }
 }
-
-// // function to display votes after 25 clicks
-// function totalFire(){
-//   if (clickTotal === 0) {
-//     //activate chart display
-//     pictureContainer.removeEventListener('click', handleClick);
-//     clickAndViewPush();
-//     makeChart();
-//     console.log('views', viewsArray);
-//     console.log('clicks', clicksArray);
-//     show(chartPop);
-//   }
-// }
-
-// NEW FN TO GEN IMAGES
-// function picSelect() {
-//   var currentImages = [];
-//   for(var i = 0; i < picArrayContainers.length; i++) {
-//     var currentRandomIndex = randomIndex(picArray.length);
-//     while (currentImages.includes(currentRandomIndex)) {
-//       currentRandomIndex = randomIndex(picArray.length);
-//     }
-//     currentImages.push(currentRandomIndex);
-//     picArrayContainers[i].src = picArray[currentRandomIndex].src;
-//     picArrayContainers[i].title = picArray[currentRandomIndex].title;
-//     picArrayContainers[i].alt = picArray[currentRandomIndex].alt;
-//     picArray[currentRandomIndex].viewed++;
-//   }
-//   console.table(picArray);
-// }
 
 // Get 6 FN, to create 2x sets of 3 unique images
 function getUnique() {
@@ -160,9 +131,9 @@ function getUnique() {
 // remove first 3 from 6 arr
 function removeThree() {
   for (var i = 0; i < 3; i++) {
-    console.log('before shift', uniqueIndexes);
+    // console.log('before shift', uniqueIndexes);
     uniqueIndexes.shift();
-    console.log('after shift', uniqueIndexes);
+    // console.log('after shift', uniqueIndexes);
   }
 }
 
@@ -180,9 +151,11 @@ function improvedPicSelect() {
   }
 }
 
-// event listener
+// event listener for click pic changes
 pictureContainer.addEventListener('click', handleClick);
 
+// event listener for reset vote data
+resetCommand.addEventListener('click', resetClick);
 
 // function to show/hide
 function show(chartPop) {
@@ -222,7 +195,32 @@ function makeChart() {
     }
   });
 }
-// add images to array on page load
+
+// FN for localStorage to save vote data between page refreshes
+function dataStore() {
+  var voteString = JSON.stringify(picArray);
+  localStorage.setItem('votes', voteString);
+}
+
+// FN to retrieve vote data from LS
+function dataGet() {
+  if (localStorage.getItem('votes')) {
+    var getVotes = localStorage.getItem('votes');
+    var parseVotes = JSON.parse(getVotes);
+    picArray = parseVotes;
+  }
+  // make else stuff
+}
+
+// FN to reset on click w event handler
+function resetClick() {
+  clicksArray = [];
+  viewsArray = [];
+  titleArray = [];
+  localStorage.clear();
+  location.reload();
+}
+
+// add images to array on page load & create initial images
 createOnPageLoad();
-// generate images initially, and per click
-// picSelect();
+
