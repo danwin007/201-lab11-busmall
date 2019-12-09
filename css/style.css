@@ -24,6 +24,8 @@ h2 {
 p {
   font-size: medium;
   padding: 10px;
+  width: 70%;
+  margin: auto;
 }
 
 .bodyCopy {
@@ -37,13 +39,9 @@ body {
 }
 
 .resultsBar {
-  outline: 1px dashed red;
-  /* width: 30%; */
-  /* float: left; */
   width: 80%;
   margin: auto;
-  /* height: 200px; */
-  /* display: none; */
+ 
 }
 
 #chart {
@@ -61,39 +59,30 @@ li {
 }
 
 #image-container {
-  /* outline: 1px solid blue; */
-  /* width: 70%; */
   width: 80%;
   margin: auto;
-  height: 325px;
-  /* float: right; */
+  height: 25%;
 }
 
 #image-container > img {
   width: 29%;
-  /* margin-left: auto;
-  margin-right: auto; */
   vertical-align: middle;
+  margin: auto;
 }
 
 #pic1 {
-  /* float: left; */
   margin: auto;
-  /* outline: 3px dotted red; */
   padding: 2px;
 }
 
 #pic2 {
   margin: auto;
   width: 30%;
-  /* outline: 3px dotted yellow; */
   padding: 2px;
 }
 
 #pic3 {
-  /* float: right; */
   margin: auto;
-  /* outline: 3px dotted green; */
   padding: 2px;
 }
 
